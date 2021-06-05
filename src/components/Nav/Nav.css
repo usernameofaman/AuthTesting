@@ -1,0 +1,25 @@
+.items-box{
+
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    background-color: rgb(38, 38, 38);
+    width: 100%;
+    height: 60px;
+    line-height: 40px;
+
+
+}
+
+.items-box li{
+    font-family: futura;
+    color: white;
+    padding: 10px;
+    margin-left: 25px;
+    transition: transform .5s;
+}
+
+.items-box li:hover{
+    transform: scale(1.2);
+
+}

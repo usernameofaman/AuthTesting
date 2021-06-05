@@ -1,0 +1,35 @@
+.FormBody {
+    margin-top: 5%;
+    display: grid;
+    flex-direction: column;
+    border-radius: 4px;
+    align-items: flex-start;
+    width: 80%;
+    margin-left: 12%;
+    
+  }
+
+
+
+  .FormBody input {
+    margin-bottom: 20px;
+    padding: 10px;
+    margin: 15px;
+  }
+  .FormBody button {
+    background-color: rgb(22, 185, 77);
+    border-radius: 3px;
+    padding: 10px;
+  
+    width: 80px;
+    margin-left: 45%;
+    font-size: medium;
+    font-weight: bold;
+  }
+  #heading {
+    text-align: center;
+    color: black;
+    font-size: xx-large;
+    font-weight: bold;
+  }
+  

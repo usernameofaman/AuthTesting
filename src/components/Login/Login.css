@@ -1,0 +1,27 @@
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+  }
+  .LoginForm input {
+    margin: 15px;
+    padding: 10px;
+    margin-bottom: 10%;
+  }
+  .main_div {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    padding: 20px;
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 5%;
+  }
+  .LoginForm button {
+    background-color: rgb(22, 185, 77);
+    border-radius: 3px;
+    padding: 10px;
+    font-weight: bold;
+    width: 80px;
+    margin-left: 42%;
+  }
+  
