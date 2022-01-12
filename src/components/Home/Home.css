@@ -1,5 +1,12 @@
 *{
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+ 
+a {
+  text-decoration: none;
+  width: 100%;
+  margin: 0 5px 0 5px;
 }
 
 #welcome-space{

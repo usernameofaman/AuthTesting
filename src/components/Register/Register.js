@@ -1,17 +1,57 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Register.css";
+import styled from "styled-components";
+import { ButtonOrange } from "../Common/Button";
 // import { Container, CssBaseline } from "@material-ui/core";
+
+
+const SignInContainer = styled.div`
+padding-top: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const SignInBox = styled.div`
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+justify-content: center;
+`
+const TitleText = styled.div`
+  width: 100%;
+  font-size: 40px;
+  font-weight: bold;
+  align-self: center;
+  text-align: center;
+  margin-bottom: 10px;
+`
+const SubTitle = styled.div`
+  width: 100%;
+  font-size: 20px;
+  align-self: center;
+  text-align: center;
+  margin-bottom: 40px;
+`
+const InputContainer = styled.input`
+  width: 93%;
+  height: 50px;
+  padding: 10px 10px 10px 20px;
+  outline: none;
+  border: 1.2px solid #e7e3e3;
+  border-radius: 5px;
+  margin-top: 10px;
+`
 
 function Register() {
 
   const history = useHistory();
+  const [signUpSuccess, setSignUpSuccess] = useState(false)
+  const [signUpState, setSignUpStage] = useState(0)
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    cpassword: "",
+    email:"" , firstName:"" , lastName:"" , password:"" , confirmPassword:""
   });
   let name, value;
   const handleInputs = (e) => {
@@ -19,98 +59,141 @@ function Register() {
     console.log(name);
     value = e.target.value;
     setUser({ ...user, [name]: value });
-    
+
   };
   console.log(user);
+  function ValidateEmail(mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return (true)
+    }
+    return (false)
+  }
+
+  const changeState = () => {
+    const { email } = user;
+    if (!ValidateEmail(email)) {
+      window.alert("Invalid email")
+      return
+    }
+    setSignUpStage(1);
+  }
 
   const PostData = async (e) => {
     e.preventDefault();
-    const { name,email,phone,password,cpassword } = user;
+    const { email , firstName , lastName , password , confirmPassword } = user;
+    if (!ValidateEmail(email)) {
+      window.alert("Invalid email")
+      return
+    }
+    if(password!== confirmPassword){
+      window.alert("Passwords don't match")
+      return
+    }
+    if(email==="" || firstName==="" || lastName ==="" || password==="" || confirmPassword===""){
 
-    const res = await fetch("/register", {
+      window.alert("Fill all the details")
+      return
+    }
+    const res = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
         email,
-        phone,
-        password,
-        cpassword,
       }),
     }).then((res) => res.json());
-
-    window.alert(res.error)
-    if(res.status === "success"){
-    history.push("/signin");
+    if (res.error)
+      window.alert(res.error)
+    if (res.status === "success") {
+      setSignUpSuccess(true)
     }
   };
 
   return (
-    <div id="register">
-      <div>
-        <form className="FormBody" method="POST">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            autoComplete="off"
-            placeholder="Enter Your Full Name"
-            value={user.name}
-            onChange={handleInputs}
-            required
-          />
+    <>
+      {
+        signUpSuccess ?
+          <>
+          Done
+          </>
+          :
 
-          <input
-            type="email"
-            name="email"
-            id="email"
-            autoComplete="off"
-            placeholder="Enter Your Email Id"
-            value={user.email}
-            onChange={handleInputs}
-            required
-          />
-          <input
-            type="number"
-            name="phone"
-            id="phone"
-            autoComplete="off"
-            placeholder="Enter Your Mobile Number"
-            value={user.phone}
-            onChange={handleInputs}
-            required
-            max="10"
-            min="10"
-          />
-
-          <input
-            type="password"
-            name="password"
-            id="password"
-            autoComplete="off"
-            placeholder="Enter Password  "
-            value={user.password}
-            onChange={handleInputs}
-            required
-          />
-          <input
-            type="password"
-            name="cpassword"
-            id="cpassword"
-            autoComplete="off"
-            placeholder="Enter Password Again "
-            value={user.cpassword}
-            onChange={handleInputs}
-            required
-          />
-          <button id="signup" name="signup" onClick={PostData}>
-            SignUp
-          </button>
-        </form>
-      </div>
-    </div>
+          <SignInContainer>
+            <SignInBox>
+              <TitleText>
+                Sign Up To Get Started
+              </TitleText>
+              <SubTitle>
+                Enter your details below
+              </SubTitle>
+              <InputContainer
+                type="email"
+                name="email"
+                id="email"
+                autoComplete="off"
+                placeholder="Enter Your Email Id"
+                value={user.email}
+                onChange={handleInputs}
+                required />
+              {
+                signUpState === 1 &&
+                <>
+                  <div style={{ display: "flex", width: "100%" }}>
+                    <InputContainer
+                      style={{ marginRight: "10px" }}
+                      type="text"
+                      name="firstName"
+                      id="firstName"
+                      autoComplete="off"
+                      placeholder="First Name"
+                      value={user.firstName}
+                      onChange={handleInputs}
+                      required />
+                    <InputContainer
+                      type="text"
+                      name="lastName"
+                      id="lastName"
+                      autoComplete="off"
+                      placeholder="Last Name"
+                      value={user.lastName}
+                      onChange={handleInputs}
+                      required />
+                  </div>
+                  <InputContainer
+                    type="password"
+                    name="password"
+                    id="password"
+                    autoComplete="off"
+                    placeholder="Password"
+                    value={user.password}
+                    onChange={handleInputs}
+                    required />
+                  <InputContainer
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    autoComplete="off"
+                    placeholder="Confirm Password"
+                    value={user.confirmPassword}
+                    onChange={handleInputs}
+                    required />
+                </>
+              }
+              {
+                signUpState === 0 ?
+                  <ButtonOrange onClick={changeState}>
+                    Sign Up
+                  </ButtonOrange>
+                  :
+                  <ButtonOrange onClick={PostData}>
+                    Sign Up
+                  </ButtonOrange>
+              }
+            </SignInBox>
+          </SignInContainer>
+      }
+    </>
   );
 }
 
