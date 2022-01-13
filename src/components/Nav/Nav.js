@@ -39,11 +39,10 @@ function Nav() {
                     {
                         !window.location.pathname.includes("Register") &&
                         <NavLink to="/Register"><Button>Sign Up</Button></NavLink>
-                    // <a href="Register"><Button>Sign Up</Button></a>
                 }
                     {
                         !window.location.pathname.includes("signin") &&
-                        <a href="signin"><Button>Sign In</Button></a>
+                        <NavLink to="/signin"><Button>Sign In</Button></NavLink>
                     }
                 </ButtonsWrapper>
             </Container>
