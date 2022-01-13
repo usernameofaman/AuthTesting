@@ -54,7 +54,7 @@ function Login() {
     e.preventDefault();
     if(email==="")
       window.alert("Enter credentials")
-    const res = await fetch("/login", {
+    const res = await fetch("https://node-microservice-task.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

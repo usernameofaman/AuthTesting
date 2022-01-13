@@ -51,7 +51,7 @@ function Register() {
   const [signUpSuccess, setSignUpSuccess] = useState(false)
   const [signUpState, setSignUpStage] = useState(0)
   const [user, setUser] = useState({
-    email:"" , firstName:"" , lastName:"" , password:"" , confirmPassword:""
+    email: "", firstName: "", lastName: "", password: "", confirmPassword: ""
   });
   let name, value;
   const handleInputs = (e) => {
@@ -80,32 +80,35 @@ function Register() {
 
   const PostData = async (e) => {
     e.preventDefault();
-    const { email , firstName , lastName , password , confirmPassword } = user;
+    const { email, firstName, lastName, password, confirmPassword } = user;
     if (!ValidateEmail(email)) {
       window.alert("Invalid email")
       return
     }
-    if(password!== confirmPassword){
+    if (password !== confirmPassword) {
       window.alert("Passwords don't match")
       return
     }
-    if(email==="" || firstName==="" || lastName ==="" || password==="" || confirmPassword===""){
+    if (email === "" || firstName === "" || lastName === "" || password === "" || confirmPassword === "") {
 
       window.alert("Fill all the details")
       return
     }
-    const res = await fetch("/api/register", {
+    const res = await fetch("https://node-microservice-task.herokuapp.com/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
+        password,
+        firstName,
+        lastName
       }),
     }).then((res) => res.json());
-    if (res.error)
-      window.alert(res.error)
-    if (res.status === "success") {
+    if (res.responseData && res.responseData.error)
+      window.alert(res.responseData.error)
+    if (res.responseData && res.responseData.status === "success") {
       setSignUpSuccess(true)
     }
   };
@@ -115,7 +118,25 @@ function Register() {
       {
         signUpSuccess ?
           <>
-          Done
+            <SignInContainer>
+              <SignInBox>
+                <TitleText>
+                  Thank You
+                </TitleText>
+                <SubTitle style={{
+                  color: "#adadad",
+                  fontSize: "15px"
+                }}>
+                  We sent an email to {user.email} <br>
+                  </br>Click confirmation link in the email to verify the account.
+                </SubTitle>
+                <ButtonOrange onClick={changeState}>
+                  Open Email App & Confirm
+                </ButtonOrange>
+              </SignInBox>
+            </SignInContainer>
+
+
           </>
           :
 
