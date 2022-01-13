@@ -67,11 +67,11 @@ function Login() {
 
 
 
-    if (res.status === "ok") {
+    if (res.responseData && res.responseData.status === "ok") {
       window.alert("Login Sucessfull");
       history.push("/home");
     } else {
-      window.alert(res.error)
+      window.alert(res.responseData.error || "Unable to login")
     }
   };
   return (
