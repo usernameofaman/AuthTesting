@@ -2,7 +2,7 @@ import React from 'react'
 import "./Nav.css"
 import styled from 'styled-components';
 import { Button } from '../Common/Button'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
     width : 100%;
