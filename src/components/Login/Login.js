@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { ButtonOrange } from "../Common/Button";
@@ -46,6 +46,9 @@ const InputContainer = styled.input`
 
 function Login() {
   const history = useHistory();
+  useEffect(() => {
+    
+  }, [])
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -69,7 +72,7 @@ function Login() {
 
     if (res.responseData && res.responseData.status === "ok") {
       window.alert("Login Sucessfull");
-      history.push("/home");
+      history.push(`/home/${email}`);
     } else {
       window.alert(res.responseData.error || "Unable to login")
     }

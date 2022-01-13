@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import "./Register.css";
 import styled from "styled-components";
 import { ButtonOrange } from "../Common/Button";
@@ -47,7 +46,6 @@ const InputContainer = styled.input`
 
 function Register() {
 
-  const history = useHistory();
   const [signUpSuccess, setSignUpSuccess] = useState(false)
   const [signUpState, setSignUpStage] = useState(0)
   const [user, setUser] = useState({

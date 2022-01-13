@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const HomeContainer = styled.div`
@@ -21,7 +20,7 @@ const HeroText = styled.div`
 `
 
 const SelectorWrapper = styled.div`
-  width: 506px;
+  width: 586px;
   height: 60px;
   background-color: white;
   display: flex;
@@ -50,7 +49,7 @@ const Select = styled.select`
 const DateSelector = styled.input`
 outline: none;
     border: none;
-    width: 90px;
+    width: 130px;
     margin-top: 5px;
 `
 
@@ -70,8 +69,11 @@ function Menu() {
         <SelectorWrapper>
           <LocationSelector>
             <span style={{ marginLeft: "4px" }}>Location</span>
-            <Select value="Philedelphia">
-              <option>Philedelphia</option>
+            <Select  >
+              <option>Mumbai</option>
+              <option>Pune</option>
+              <option>Hydrabad</option>
+              <option>Chennai</option>
             </Select>
           </LocationSelector>
           <LocationSelector>
@@ -85,7 +87,7 @@ function Menu() {
             </DateSelector>
           </LocationSelector>
           <LocationSelector style={{ borderRight: "1px solid #939191"}}>
-            <Icon src="/images/download.png" />
+            <Icon src="/images/download.png" onClick={() => window.alert("This functionality was not mentioned")} />
           </LocationSelector>
         </SelectorWrapper>
       </ImageContainer>
