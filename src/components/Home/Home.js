@@ -20,7 +20,7 @@ const HeroText = styled.div`
 `
 
 const SelectorWrapper = styled.div`
-  width: 586px;
+  width: 282px;
   height: 60px;
   background-color: white;
   display: flex;
@@ -64,29 +64,19 @@ function Menu() {
     <HomeContainer>
       <ImageContainer>
         <HeroText>
-          Find homes or hotels in a few clicks
+          Buy courses for your online learning
         </HeroText>
         <SelectorWrapper>
           <LocationSelector>
             <span style={{ marginLeft: "4px" }}>Location</span>
             <Select  >
-              <option>Mumbai</option>
-              <option>Pune</option>
-              <option>Hydrabad</option>
-              <option>Chennai</option>
+              <option>Class 6</option>
+              <option>Class 7</option>
+              <option>Class 8</option>
+              <option>Class 9</option>
             </Select>
           </LocationSelector>
-          <LocationSelector>
-            <span style={{ marginLeft: "4px" }}>Check In</span>
-            <DateSelector type="date">
-            </DateSelector>
-          </LocationSelector>
-          <LocationSelector>
-            <span style={{ marginLeft: "4px" }}>Check In</span>
-            <DateSelector type="date">
-            </DateSelector>
-          </LocationSelector>
-          <LocationSelector style={{ borderRight: "1px solid #939191"}}>
+          <LocationSelector style={{ borderRight: "1px solid #939191", cursor: "pointer" }}>
             <Icon src="/images/download.png" onClick={() => window.alert("This functionality was not mentioned")} />
           </LocationSelector>
         </SelectorWrapper>
